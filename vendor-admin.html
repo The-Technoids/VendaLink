@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Dashboard — VendaLink</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin-container { max-width: 400px; margin: 40px auto; padding: 0 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--teal-900); }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: var(--font-body); }
+    .btn-primary { width: 100%; background: var(--teal-600); color: #fff; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    .btn-primary:hover { background: var(--teal-800); }
+    .btn-secondary { width: 100%; background: var(--teal-50); color: var(--teal-800); padding: 10px; border: none; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; margin-top: 8px; }
+    
+    .status-panel { background: var(--card-bg); border: 2px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px; }
+    .status-panel.is-open { border-color: var(--teal-400); background: var(--teal-50); }
+    .status-panel.is-closed { border-color: var(--coral-400); background: #FFF3F0; }
+    
+    .giant-toggle { width: 100%; padding: 16px; font-size: 18px; font-weight: bold; border-radius: 99px; border: none; cursor: pointer; margin-top: 16px; transition: 0.2s; }
+    .is-open .giant-toggle { background: var(--coral-600); color: white; }
+    .is-closed .giant-toggle { background: var(--teal-600); color: white; }
+    
+    .hidden { display: none !important; }
+    .nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .logout-btn { background: none; border: none; color: var(--coral-600); font-weight: 600; cursor: pointer; }
+    
+    .section-title { margin: 24px 0 12px; font-size: 18px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .brand-link { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <!-- Links back to customer view -->
+    <a href="index.html" class="brand-link">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <h1 style="margin:0; font-size:22px; font-weight:700;">VendaLink <span style="color: var(--teal-200); font-size: 16px;">/ Traders</span></h1>
+    </a>
+  </header>
+
+  <main class="admin-container">
+    <!-- AUTHENTICATION SCREEN -->
+    <div id="auth-section">
+      <h2 style="margin-top:0;">Vendor Dashboard</h2>
+      <p style="color: var(--ink-muted); margin-bottom: 24px; font-size: 14px;">Sign in with your email and password to manage your stall.</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="phone">Email Address</label>
+          <input type="email" id="phone" placeholder="your@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="pin">Password</label>
+          <input type="password" id="pin" placeholder="Your password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary">Sign In</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--ink-muted);">
+        Don't have an account? <a href="vendor-signup.html" style="color: var(--teal-600); font-weight: 600; text-decoration: none;">Sign up here</a>
+      </div>
+    </div>
+
+    <!-- VENDOR DASHBOARD SCREEN -->
+    <div id="dashboard-section" class="hidden">
+      <div class="nav-header">
+        <h2 id="vendor-name" style="margin:0;">Dashboard</h2>
+        <button id="logout-btn" class="logout-btn">Log out</button>
+      </div>
+
+      <!-- BIG STATUS TOGGLE -->
+      <div id="status-panel" class="status-panel">
+        <p style="margin: 0; font-size: 14px; font-weight: 600; color: var(--ink-muted);">Current Status</p>
+        <h3 id="current-status-text" style="font-size: 28px; margin: 8px 0;">Loading...</h3>
+        <button id="toggle-status-btn" class="giant-toggle">Switch to...</button>
+      </div>
+
+      <!-- STALL PROFILE FORM -->
+      <h3 class="section-title">Stall Profile</h3>
+      <div class="vendor-card">
+        <form id="profile-form">
+          <div class="form-group">
+            <label>Business Name</label>
+            <input type="text" id="prof-business" required>
+          </div>
+          <div class="form-group">
+            <label>Owner Name</label>
+            <input type="text" id="prof-owner" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="prof-phone" required>
+          </div>
+          <div class="form-group">
+            <label>Payment Methods Accepted</label>
+            <input type="text" id="prof-payments" placeholder="e.g. Cash, EFT, Yoco" required>
+          </div>
+          <div class="form-group">
+            <label>Location Description</label>
+            <textarea id="prof-location" rows="2" required></textarea>
+            <button type="button" id="update-gps-btn" class="btn-secondary">📍 Update GPS to my current location</button>
+            <p id="gps-status" style="font-size: 11px; color: var(--ink-muted); margin-top: 4px;"></p>
+          </div>
+          <button type="submit" id="save-profile-btn" class="btn-primary" style="padding: 10px;">Save Profile Info</button>
+
+          <a href="index.html" class="back-link">← Back to customer view</a>
+        </form>
+
+        
+      </div>
+
+      <!-- STOCK LIST -->
+      <h3 class="section-title">Today's Stock</h3>
+      <div class="vendor-card" style="padding: 0;">
+        <div id="stock-list" class="item-list" style="border:none; margin:0; padding: 16px;">
+          <p class="loading">Loading stock...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="vendor-app.js"></script>
+</body>
+</html>

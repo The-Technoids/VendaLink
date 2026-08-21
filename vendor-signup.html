@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Signup — VendaLink</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .auth-container {
+      max-width: 420px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .auth-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+    }
+
+    .auth-card h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .auth-card .subtitle {
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: var(--font-body);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--teal-400);
+    }
+
+    .form-group small {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .auth-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--teal-600);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .auth-btn:hover {
+      background: var(--teal-800);
+    }
+
+    .auth-btn:disabled {
+      background: var(--ink-muted);
+      cursor: not-allowed;
+    }
+
+    .auth-message {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+
+    .auth-message.success {
+      display: block;
+      background: #D1FAE5;
+      color: #065F46;
+    }
+
+    .auth-message.error {
+      display: block;
+      background: #FEE;
+      color: var(--coral-600);
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    .auth-footer a {
+      color: var(--teal-600);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: var(--teal-600);
+    }
+
+    .location-btn {
+      padding: 8px 12px;
+      background: var(--teal-50);
+      color: var(--teal-800);
+      border: 1px solid var(--teal-200);
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .location-btn:hover {
+      background: var(--teal-100);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <h1>VendaLink</h1>
+    </div>
+    <p class="tagline">Vendor Portal</p>
+  </header>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <h2>Create Vendor Account</h2>
+      <p class="subtitle">Join VendaLink and reach more customers</p>
+
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="business-name">Business Name *</label>
+          <input 
+            type="text" 
+            id="business-name" 
+            required 
+            placeholder="e.g., Mama Thandi's Kitchen"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="owner-name">Your Name *</label>
+          <input 
+            type="text" 
+            id="owner-name" 
+            required 
+            placeholder="e.g., Thandiwe Nkosi"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input 
+            type="email" 
+            id="email" 
+            required 
+            placeholder="your@email.com"
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            required 
+            placeholder="082 123 4567"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password *</label>
+          <input 
+            type="password" 
+            id="password" 
+            required 
+            minlength="6"
+            placeholder="At least 6 characters"
+            autocomplete="new-password"
+          >
+          <small>Must be at least 6 characters</small>
+        </div>
+
+        <div class="form-group">
+          <label for="location-desc">Location Description</label>
+          <textarea 
+            id="location-desc" 
+            placeholder="e.g., Outside Centurion Taxi Rank, Gate 2"
+          ></textarea>
+          <button type="button" class="location-btn" id="get-location-btn">
+            📍 Use my current location
+          </button>
+        </div>
+
+        <input type="hidden" id="latitude" value="-25.860100">
+        <input type="hidden" id="longitude" value="28.189400">
+
+        <div class="form-group">
+          <label for="payment-types">Payment Methods</label>
+          <input 
+            type="text" 
+            id="payment-types" 
+            placeholder="e.g., Cash, EFT, SnapScan"
+            value="Cash"
+          >
+        </div>
+
+        <button type="submit" class="auth-btn" id="signup-btn">
+          Create Account
+        </button>
+
+        <div id="auth-message" class="auth-message"></div>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account? <a href="vendor-admin.html">Log in</a>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to customer view</a>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:3000/api';
+
+    // Get location button
+    document.getElementById('get-location-btn').addEventListener('click', () => {
+      const btn = document.getElementById('get-location-btn');
+      
+      if (!navigator.geolocation) {
+        alert('Geolocation is not supported by your browser');
+        return;
+      }
+
+      btn.textContent = '📍 Getting location...';
+      btn.disabled = true;
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          document.getElementById('latitude').value = position.coords.latitude;
+          document.getElementById('longitude').value = position.coords.longitude;
+          btn.textContent = '✓ Location captured';
+          setTimeout(() => {
+            btn.textContent = '📍 Use my current location';
+            btn.disabled = false;
+          }, 2000);
+        },
+        (error) => {
+          alert('Could not get your location. Using default.');
+          btn.textContent = '📍 Use my current location';
+          btn.disabled = false;
+        }
+      );
+    });
+
+    // Signup form
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        businessName: document.getElementById('business-name').value.trim(),
+        ownerName: document.getElementById('owner-name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phoneNumber: document.getElementById('phone').value.trim(),
+        password: document.getElementById('password').value,
+        locationDescription: document.getElementById('location-desc').value.trim(),
+        latitude: parseFloat(document.getElementById('latitude').value),
+        longitude: parseFloat(document.getElementById('longitude').value),
+        paymentTypes: document.getElementById('payment-types').value.trim()
+      };
+
+      const btn = document.getElementById('signup-btn');
+      const message = document.getElementById('auth-message');
+
+      btn.disabled = true;
+      btn.textContent = 'Creating account...';
+      message.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Signup failed');
+        }
+
+        // Store token and vendor info
+        localStorage.setItem('vendorToken', data.token);
+        localStorage.setItem('vendorId', data.vendor.vendorId);
+        localStorage.setItem('businessName', data.vendor.businessName);
+
+        message.className = 'auth-message success';
+        message.textContent = '✓ Account created! Redirecting to your dashboard...';
+        message.style.display = 'block';
+
+        setTimeout(() => {
+          window.location.href = 'vendor-admin.html';
+        }, 1500);
+
+      } catch (err) {
+        console.error('Signup error:', err);
+        message.className = 'auth-message error';
+        message.textContent = err.message;
+        message.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
+    });
+
+    // Check if already logged in
+    if (localStorage.getItem('vendorToken')) {
+      window.location.href = 'vendor-admin.html';
+    }
+  </script>
+</body>
+</html>
