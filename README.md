@@ -67,7 +67,7 @@ VendaLink Final/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/vendalink.git
+   git clone https://github.com/The-Technoids/vendalink.git
    cd vendalink
    ```
 
